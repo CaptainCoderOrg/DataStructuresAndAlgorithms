@@ -11,7 +11,6 @@ internal class GameMap : IGameMap
         {
             _options[location] = locationOptions.ToArray();
         }
-        // _options = options;
     }
 
     public IEnumerable<string> Locations { get; }
