@@ -3,6 +3,7 @@ namespace CaptainCoder.Graph;
 public class MapBuilder
 {
     private HashSet<string> _locations = new ();
+    private Dictionary<string, IEnumerable<GameOption>> _options = new ();
     // Dictionary is a HashTable (HashMap in Java)
     public MapBuilder AddLocation(string location)
     {
@@ -10,14 +11,14 @@ public class MapBuilder
         return this;
     }
 
-    public MapBuilder AddOptions(string optionName, string start, string end)
+    public MapBuilder AddOptions(string optionName, string start, string destination)
     {
-        throw new NotImplementedException();
+        _options[start] = new List<GameOption>(){new GameOption(optionName, destination)};
         return this;
     }
 
     public IGameMap Build()
     {
-        return new GameMap(_locations);
+        return new GameMap(_locations, _options);
     }
 }
