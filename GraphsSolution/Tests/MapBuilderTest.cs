@@ -8,25 +8,45 @@ public class MapBuilderTest
     // The Musium
     // Boss Room
     // Death Platform
-    [Fact]
-    public void test_add_location()
+    [Theory]
+    [InlineData("Captain Coder's Academy")]
+    [InlineData("Hoboken, NJ")]
+    [InlineData("Boss Room")]
+    [InlineData("Death Platform")]
+    public void test_add_location(string location)
     {
         // Triple A testing (AAA)
         // Arrange
         MapBuilder builder = new MapBuilder();
 
         // Act
-        builder.AddLocation("Captain Coder's Academy");
+        builder.AddLocation(location);
         IGameMap map = builder.Build();
 
         // Assert
         map.Locations.Count().ShouldBe(1);
-        map.Locations.ShouldContain("Captain Coder's Academy");
+        map.Locations.ShouldContain(location);
     }
 
-    // [Fact]
-    // public void test_add_locations()
-    // {
+    [Theory]
+    [InlineData("Captain Coder's Academy")]
+    [InlineData("Hoboken, NJ")]
+    [InlineData("Boss Room")]
+    [InlineData("Death Platform")]
+    public void test_add_duplicate_location(string location)
+    {
+        // Triple A testing (AAA)
+        // Arrange
+        MapBuilder builder = new MapBuilder();
 
-    // }
+        // Act
+        builder.AddLocation(location);
+        builder.AddLocation(location);
+        builder.AddLocation(location);
+        IGameMap map = builder.Build();
+
+        // Assert
+        map.Locations.Count().ShouldBe(1);
+        map.Locations.ShouldContain(location);
+    }
 }

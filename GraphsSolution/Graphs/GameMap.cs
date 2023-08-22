@@ -2,7 +2,12 @@ namespace CaptainCoder.Graph;
 
 internal class GameMap : IGameMap
 {
-    public IEnumerable<string> Locations => new string[] { "Captain Coder's Academy" };
+    internal GameMap(IEnumerable<string> locations)
+    {
+        Locations = locations.ToArray();
+    }
+
+    public IEnumerable<string> Locations { get; }
 
     public IEnumerable<string> Options(string location)
     {

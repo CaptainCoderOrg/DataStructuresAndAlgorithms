@@ -2,9 +2,11 @@ namespace CaptainCoder.Graph;
 
 public class MapBuilder
 {
-    
+    private HashSet<string> _locations = new ();
+    // Dictionary is a HashTable (HashMap in Java)
     public MapBuilder AddLocation(string location)
     {
+        _locations.Add(location);
         return this;
     }
 
@@ -16,6 +18,6 @@ public class MapBuilder
 
     public IGameMap Build()
     {
-        return new GameMap();
+        return new GameMap(_locations);
     }
 }
