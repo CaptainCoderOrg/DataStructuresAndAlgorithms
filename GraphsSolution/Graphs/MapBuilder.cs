@@ -8,12 +8,13 @@ public class MapBuilder
     public MapBuilder AddLocation(string location)
     {
         _locations.Add(location);
+        _options[location] = new List<GameOption> ();
         return this;
     }
 
     public MapBuilder AddOptions(string optionName, string start, string destination)
     {
-        _options[start] = new List<GameOption>(){new GameOption(optionName, destination)};
+        (_options[start] as List<GameOption>)!.Add(new GameOption(optionName, destination));
         return this;
     }
 

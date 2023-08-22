@@ -3,7 +3,7 @@ namespace CaptainCoder.Graph;
 internal class GameMap : IGameMap
 {
     private readonly Dictionary<string, IEnumerable<GameOption>> _options;
-    internal GameMap(IEnumerable<string> locations, IReadOnlyDictionary<string, IEnumerable<GameOption>> options)
+    internal GameMap(IEnumerable<string> locations, Dictionary<string, IEnumerable<GameOption>> options)
     {
         Locations = locations.ToArray();
         _options = new Dictionary<string, IEnumerable<GameOption>>();

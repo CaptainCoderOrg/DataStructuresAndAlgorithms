@@ -70,4 +70,38 @@ public class MapBuilderTest
         map.Options("Captain Coder's Academy")
            .ShouldContain(new GameOption("Go to Death Platform", "Death Platform"));
     }
+
+    [Fact]
+    public void test_add_multiple_options()
+    {
+        // Arrange
+        MapBuilder builder = new MapBuilder();
+        builder.AddLocation("Captain Coder's Academy")
+               .AddLocation("Death Platform")
+               .AddLocation("Hoboken, NJ")
+               .AddLocation("Boss Room");
+
+        // Act
+        builder.AddOptions("Go to Death Platform", "Captain Coder's Academy", "Death Platform")
+               .AddOptions("Go to New Jersey", "Captain Coder's Academy", "Hoboken, NJ")
+               .AddOptions("Fight Boss", "Captain Coder's Academy", "Boss Room");
+        IGameMap map = builder.Build();
+
+        // Assert
+        map.Locations.Count().ShouldBe(4);
+        map.Locations.ShouldContain("Captain Coder's Academy");
+        map.Locations.ShouldContain("Death Platform");
+        map.Locations.ShouldContain("Hoboken, NJ");
+        map.Locations.ShouldContain("Boss Room");
+
+        map.Options("Captain Coder's Academy").Count().ShouldBe(3);
+        map.Options("Captain Coder's Academy")
+           .ShouldContain(new GameOption("Go to Death Platform", "Death Platform"));
+
+        map.Options("Captain Coder's Academy")
+           .ShouldContain(new GameOption("Go to New Jersey", "Hoboken, NJ"));
+
+        map.Options("Captain Coder's Academy")
+           .ShouldContain(new GameOption("Fight Boss", "Boss Room"));
+    }
 }
