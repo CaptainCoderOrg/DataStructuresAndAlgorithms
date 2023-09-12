@@ -1,0 +1,1 @@
+internal record struct Entry<T>(string Key, T Value);
