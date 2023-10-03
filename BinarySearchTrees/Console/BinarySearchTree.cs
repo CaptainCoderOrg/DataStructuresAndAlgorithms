@@ -7,6 +7,14 @@ public class BinarySearchTree
     private BinarySearchNode? _root;
 
     public int Count { get; private set; } = 0;
+    public List<char> AllData => DataSet(_root, new List<char>());
+    private List<char> DataSet(BinarySearchNode? _current, List<char> acc)
+    {
+        if (_current is null) { return acc; }
+        acc.Add(_current.Data);
+        DataSet(_current.LeftChild, acc);
+        return DataSet(_current.RightChild, acc);
+    }
 
     public bool Contains(char data) => RecursiveContains(data, _root);
     private bool RecursiveContains(char data, BinarySearchNode? currentNode)
