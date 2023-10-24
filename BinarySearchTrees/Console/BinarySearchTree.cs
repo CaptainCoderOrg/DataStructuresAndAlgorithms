@@ -4,11 +4,11 @@ using System.Diagnostics;
 
 public class BinarySearchTree
 {
-    private BinarySearchNode? _root;
+    private Node? _root;
 
     public int Count { get; private set; } = 0;
     public List<char> AllData => DataSet(_root, new List<char>());
-    private List<char> DataSet(BinarySearchNode? _current, List<char> acc)
+    private List<char> DataSet(Node? _current, List<char> acc)
     {
         if (_current is null) { return acc; }
         acc.Add(_current.Data);
@@ -17,7 +17,7 @@ public class BinarySearchTree
     }
 
     public bool Contains(char data) => RecursiveContains(data, _root);
-    private bool RecursiveContains(char data, BinarySearchNode? currentNode)
+    private bool RecursiveContains(char data, Node? currentNode)
     {
         if (currentNode is null) { return false; } // We did not find it
         if (currentNode.Data == data) { return true; } // We found it!
@@ -38,7 +38,7 @@ public class BinarySearchTree
         // If the tree is empty, make a root node
         if (_root is null)
         {
-            _root = new BinarySearchNode(data);
+            _root = new Node(data);
             Count++;
             return true;
         }
@@ -46,7 +46,7 @@ public class BinarySearchTree
         return RecursiveInsert(data, _root);
     }
 
-    private bool RecursiveInsert(char data, BinarySearchNode currentNode)
+    private bool RecursiveInsert(char data, Node currentNode)
     {
         Debug.Assert(currentNode is not null);
         if (data == currentNode.Data) { return false; }
@@ -54,7 +54,7 @@ public class BinarySearchTree
         {
             if (currentNode.LeftChild is null)
             {
-                currentNode.LeftChild = new BinarySearchNode(data);
+                currentNode.LeftChild = new Node(data);
                 Count++;
                 return true;
             }
@@ -67,7 +67,7 @@ public class BinarySearchTree
         {
             if (currentNode.RightChild is null)
             {
-                currentNode.RightChild = new BinarySearchNode(data);
+                currentNode.RightChild = new Node(data);
                 Count++;
                 return true;
             }
@@ -77,5 +77,7 @@ public class BinarySearchTree
             }
         }
     }
+
+    
 
 }
